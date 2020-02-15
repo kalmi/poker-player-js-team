@@ -7,7 +7,12 @@
   },
   "private": true,
   "dependencies": {
+    "@types/jest": "^25.1.2",
+    "body-parser": "1.15.2",
     "express": "4.x",
-    "body-parser": "1.15.2"
+    "jest": "^25.1.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
