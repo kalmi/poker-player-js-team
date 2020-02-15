@@ -5,7 +5,9 @@ class Player {
 
   static betRequest(gameState, bet) {
 
-    const {holeCards, communityCards} = gameState2friendlyState(gameState);
+    const {holeCards, allCardsStat} = gameState2friendlyState(gameState);
+
+    console.log(allCardsStat);
 
     const currentPlayer = gameState.players[gameState.in_action];
 
@@ -19,6 +21,17 @@ class Player {
     const callValue = gameState.current_buy_in - currentPlayer.bet;
     const raiseValue = callValue + gameState.minimum_raise ;
     const allInValue = 1000;
+
+    if (allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10) {
+      bet(allInValue);
+      return;
+    }
+
+    if(allCardsStat.count >= 2 && allCardsStat.type === "n")
+    {
+      bet(raiseValue);
+      return;
+    }
 
     if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
     {
@@ -95,7 +108,7 @@ function cards2stats(numberCards) {
   const [rank, count] = entries[0];
 
   return {
-    type: "nOfAKind",
+    type: "n", // n of a kind
     rank,
     count,
     score: count * 100 + rank

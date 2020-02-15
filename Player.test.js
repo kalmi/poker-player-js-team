@@ -68,7 +68,7 @@ test('raise for Q A hand', () => {
 test('have any pair raise', () => {
   Player.betRequest(gameState([
     {
-      rank: "Q"
+      rank: "2"
     },
     {
       rank: "A"
@@ -77,12 +77,12 @@ test('have any pair raise', () => {
     {
       rank:"Q"
     },
-      {
-        rank:"2"
-      },
-      {
-        rank:"3"
-      }
+    {
+      rank:"2"
+    },
+    {
+      rank:"3"
+    }
       ]
   ),
     value => {
