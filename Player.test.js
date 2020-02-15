@@ -79,6 +79,31 @@ test('raise for Q A hand', () => {
   });
 });
 
+test('have any pair raise', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "Q"
+    },
+    {
+      rank: "A"
+    }
+  ], [
+    {
+      rank:"Q"
+    },
+      {
+        rank:"2"
+      },
+      {
+        rank:"3"
+      }
+      ]
+  ),
+    value => {
+    expect(value).toBe(9);
+  });
+});
+
 test('return 0 for other cases', () => {
   const game = gameState([
     {
@@ -94,8 +119,14 @@ test('return 0 for other cases', () => {
   });
 });
 
-function gameState(hole_cards) {
+function gameState(hole_cards, communityCards) {
+  communityCards = communityCards || [];
   hole_cards.forEach(card => {
+    if (!card.suit) {
+      card.suit = "clubs";
+    }
+  });
+  communityCards.forEach(card => {
     if (!card.suit) {
       card.suit = "clubs";
     }
@@ -110,6 +141,7 @@ function gameState(hole_cards) {
         bet: 2,
         hole_cards: hole_cards
       }
-    ]
+    ],
+    community_cards: communityCards
   };
 }

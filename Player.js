@@ -5,7 +5,7 @@ class Player {
 
   static betRequest(gameState, bet) {
 
-    const {holeCards} = gameState2friendlyState(gameState);
+    const {holeCards, communityCards} = gameState2friendlyState(gameState);
 
     const currentPlayer = gameState.players[gameState.in_action];
 
@@ -17,15 +17,16 @@ class Player {
     const isPair = holeCards[0].rank === holeCards[1].rank;
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
+    const raiseValue = callValue + gameState.minimum_raise ;
 
     if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
     {
-      bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
+      bet(raiseValue);
       return;
     }
 
     if (holeCards[0].rank >= 10 && isPair) {
-      bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
+      bet(raiseValue);
     } else if (callValue <= bigBlind) {
       bet(callValue);
     } else {
