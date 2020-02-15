@@ -22,7 +22,7 @@ class Player {
     const allInValue = 1000;
     const ownBetter = communityStat.score < allCardsStat.score;
 
-    const HighPairScore = 211;
+    const HighPairScore = 210;
     const OneHighCardScore = 113;
 
     if (holeStat.score >= HighPairScore) {
