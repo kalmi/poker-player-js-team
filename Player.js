@@ -9,7 +9,7 @@ class Player {
 
     const currentPlayer = gameState.players[gameState.in_action];
 
-    if(holeCards.length !== 2){
+    if (holeCards.length !== 2){
       bet(0);
       return;
     }
@@ -30,8 +30,7 @@ class Player {
       return;
     }
 
-    if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
-    {
+    if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12) {
       bet(raiseValue);
       return;
     }
