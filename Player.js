@@ -7,8 +7,6 @@ class Player {
 
     const {holeCards, allCardsStat, holeStat} = gameState2friendlyState(gameState);
 
-    console.log(allCardsStat);
-
     const currentPlayer = gameState.players[gameState.in_action];
 
     if(holeCards.length !== 2){
