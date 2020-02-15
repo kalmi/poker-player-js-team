@@ -29,6 +29,8 @@ class Player {
       bet(raiseValue);
     } else if (callValue <= bigBlind) {
       bet(callValue);
+    } else if (holeCards[0].rank >= 13 || holeCards[1].rank >= 13) {
+      bet(callValue);
     } else {
       bet(0);
     }
