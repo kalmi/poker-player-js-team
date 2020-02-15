@@ -4,9 +4,10 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    const AllInValue = 700;
+    const AllInValue = 900;
     const HighPairScore = 210;
     const OneHighCardScore = 113;
+    const SafeCallValue = 500;
 
     const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
@@ -40,7 +41,7 @@ class Player {
     }
 
     if (holeStat.score >= OneHighCardScore) {
-      if(callValue <= 500)
+      if(callValue <= SafeCallValue)
       {
         bet(callValue);
         return;
