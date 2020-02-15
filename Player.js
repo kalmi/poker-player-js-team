@@ -14,7 +14,6 @@ class Player {
       return;
     }
 
-    const isPair = holeCards[0].rank === holeCards[1].rank;
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
     const raiseValue = callValue + gameState.minimum_raise ;
