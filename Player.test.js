@@ -13,6 +13,26 @@ test('all in for 10 pairs', () => {
   });
 });
 
+test('call for 10 pair in community', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "7"
+    },
+    {
+      rank: "4"
+    }
+  ], [
+    {
+      rank: "10"
+    },
+    {
+      rank: "10"
+    }
+  ]), value => {
+    expect(value).toBe(8);
+  });
+});
+
 test('call for random cards', () => {
   Player.betRequest(gameState([
     {

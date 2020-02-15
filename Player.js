@@ -5,7 +5,7 @@ class Player {
 
   static betRequest(gameState, bet) {
 
-    const {holeCards, allCardsStat, holeStat} = gameState2friendlyState(gameState);
+    const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
     const currentPlayer = gameState.players[gameState.in_action];
 
@@ -18,13 +18,14 @@ class Player {
     const callValue = gameState.current_buy_in - currentPlayer.bet;
     const raiseValue = callValue + gameState.minimum_raise ;
     const allInValue = 1000;
+    const ownBetter = communityStat.score < allCardsStat.score;
 
     if (holeStat.type === "n" && holeStat.count >= 2 && holeStat.rank >= 10) {
       bet(allInValue);
       return;
     }
 
-    if (allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10) {
+    if (allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10  && ownBetter) {
       bet(raiseValue);
       return;
     }
@@ -90,7 +91,10 @@ function stringCard2numberCard({rank, suit}) {
 function cards2stats(numberCards) {
 
   if (numberCards.length === 0) {
-    return {type: "none"}
+    return {
+      type: "none",
+      score: 0,
+    }
   }
 
   const rankCount = new Map();
