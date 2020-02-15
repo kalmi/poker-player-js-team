@@ -1,9 +1,5 @@
 const Player = require('./Player');
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(3).toBe(3);
-});
-
 test('raise for 10 pairs', (done) => {
   Player.betRequest(gameState([
     {
@@ -41,6 +37,49 @@ test('call for random cards', () => {
     }
   ]), value => {
     expect(value).toBe(8);
+  });
+});
+
+
+
+
+
+test('raise for A K hand', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "A"
+    },
+    {
+      rank: "K"
+    }
+  ]), value => {
+    expect(value).toBe(9);
+  });
+});
+
+test('raise for Q K hand', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "Q"
+    },
+    {
+      rank: "K"
+    }
+  ]), value => {
+    expect(value).toBe(9);
+  });
+});
+
+test('raise for Q A hand', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "Q"
+    },
+    {
+      rank: "A"
+    }
+  ]), value => {
+    expect(value).toBe(9);
   });
 });
 

@@ -15,6 +15,13 @@ class Player {
     const isPair = holeCards[0].rank === holeCards[1].rank;
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
+
+    if (rank2number(holeCards[0].rank) >= 12 && rank2number(holeCards[1].rank) >= 12)
+    {
+      bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
+      return;
+    }
+
     if (rank2number(holeCards[0].rank) >= 10 && isPair) {
       bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
     } else if (callValue <= bigBlind) {
