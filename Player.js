@@ -110,9 +110,8 @@ function cards2stats(numberCards) {
     const count = rankCountMap.get(cardRank) || 0;
     rankCountMap.set(cardRank, count + 1);
   }
-
   const rankEntries = Array.from(rankCountMap.entries());
-  rankEntries.sort(([aRank, aCount],[bRank, bCount]) => {
+  rankEntries.sort(([aRank, aCount], [bRank, bCount]) => {
     let result = bCount - aCount;
     if (result === 0) {
       result = bRank - aRank;
