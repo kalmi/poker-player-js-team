@@ -9,7 +9,7 @@ class Player {
     const isPair = holeCards[0].rank === holeCards[1].rank;
     if (
       holeCards.length === 2 &&
-      rank2numeric(holeCards[0].rank) >= 10 && isPair) {
+      rank2number(holeCards[0].rank) >= 10 && isPair) {
       bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
     } else {
       bet(0);
@@ -20,7 +20,7 @@ class Player {
   }
 }
 
-function rank2numeric(rank) {
+function rank2number(rank) {
   switch(rank) {
     case "A":
       return 14;
@@ -32,6 +32,21 @@ function rank2numeric(rank) {
       return 11;
     default:
       return Number(rank);
+  }
+}
+
+function suit2number(rank) {
+  switch(rank) {
+    case "clubs":
+      return 0;
+    case "diamonds":
+      return 1;
+    case "hearts":
+      return 2;
+    case "spades":
+      return 3;
+    default:
+      throw new Error();
   }
 }
 
