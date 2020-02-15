@@ -5,8 +5,10 @@ class Player {
 
   static betRequest(gameState, bet) {
 
+    const {holeCards} = gameState2friendlyState(gameState);
+
     const currentPlayer = gameState.players[gameState.in_action];
-    const holeCards = currentPlayer.hole_cards;
+
     if(holeCards.length !== 2){
       bet(0);
       return;
@@ -16,13 +18,13 @@ class Player {
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
 
-    if (rank2number(holeCards[0].rank) >= 12 && rank2number(holeCards[1].rank) >= 12)
+    if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
     {
       bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
       return;
     }
 
-    if (rank2number(holeCards[0].rank) >= 10 && isPair) {
+    if (holeCards[0].rank >= 10 && isPair) {
       bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
     } else if (callValue <= bigBlind) {
       bet(callValue);
@@ -63,6 +65,27 @@ function suit2number(rank) {
     default:
       throw new Error();
   }
+}
+
+function stringCard2numberCard({rank, suit}) {
+  return {
+    suit: suit2number(suit),
+    rank: rank2number(rank),
+  }
+}
+
+function gameState2friendlyState(gameState) {
+  const currentPlayer = gameState.players[gameState.in_action];
+  const holeCards = currentPlayer.hole_cards;
+  const communityCards = gameState.community_cards || [];
+
+  const cards = {
+    holeCards: holeCards.map(stringCard2numberCard),
+    communityCards: communityCards.map(stringCard2numberCard),
+    allCards: [...holeCards, ...communityCards].map(stringCard2numberCard),
+  }
+
+  return cards;
 }
 
 module.exports = Player;
