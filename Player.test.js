@@ -21,6 +21,36 @@ test('call for 10 pair in community', () => {
   });
 });
 
+test('raise for high pair if we have one of the cards', () => {
+  Player.betRequest(gameState([
+      { rank: "3" },
+      { rank: "K" }
+    ], [
+      { rank:"Q" },
+      { rank:"2" },
+      { rank:"K" }
+    ]
+    ),
+    value => {
+      expect(value).toBe(9);
+    });
+});
+
+test('raise for two pairs if we have only half of it', () => {
+  Player.betRequest(gameState([
+      { rank: "2" },
+      { rank: "K" }
+    ], [
+      { rank:"Q" },
+      { rank:"2" },
+      { rank:"K" }
+    ]
+    ),
+    value => {
+      expect(value).toBe(9);
+    });
+});
+
 test('call for random cards', () => {
   Player.betRequest(gameState([
     { rank: "A" },
@@ -103,17 +133,17 @@ test('raise for all cards pair', () => {
 
 test('have any pair call', () => {
   Player.betRequest(gameState([
-    { rank: "2" },
-    { rank: "A" }
-  ], [
-    { rank:"Q" },
-    { rank:"2" },
-    { rank:"3" }
-      ]
-  ),
+      { rank: "2" },
+      { rank: "A" }
+    ], [
+      { rank:"Q" },
+      { rank:"2" },
+      { rank:"3" }
+    ]
+    ),
     value => {
-    expect(value).toBe(8);
-  });
+      expect(value).toBe(8);
+    });
 });
 
 test('return 0 for other cases', () => {

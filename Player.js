@@ -7,6 +7,8 @@ class Player {
 
     const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
+    console.log(allCardsStat);
+
     const currentPlayer = gameState.players[gameState.in_action];
 
     if (holeCards.length !== 2) {
@@ -110,7 +112,13 @@ function cards2stats(numberCards) {
   }
 
   const entries = Array.from(rankCount.entries());
-  entries.sort((a,b) => b[1] - a[1]);
+  entries.sort((a,b) => {
+    let result = b[1] - a[1];
+    if (result === 0) {
+      result = b[0] - a[0];
+    }
+    return result;
+  });
   const [rank, count] = entries[0];
 
   return {
