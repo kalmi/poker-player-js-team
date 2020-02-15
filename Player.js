@@ -28,7 +28,7 @@ class Player {
 
     if (holeCards[0].rank >= 10 && isPair) {
       bet(allInValue);
-    } else if (holeCards[0].rank >= 9 && isPair) {
+    } else if (holeCards[0].rank >= 8 && isPair) {
       bet(callValue);
     } else if (callValue <= bigBlind) {
       bet(callValue);
