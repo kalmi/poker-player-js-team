@@ -21,6 +21,18 @@ test('call for 10 pair in community', () => {
   });
 });
 
+test('call for low pair', () => {
+  Player.betRequest(gameState([
+    { rank: "7" },
+    { rank: "4" }
+  ], [
+    { rank: "4" },
+    { rank: "10" },
+  ]), value => {
+    expect(value).toBe(8);
+  });
+});
+
 test('raise for high pair if we have one of the cards', () => {
   Player.betRequest(gameState([
       { rank: "3" },
@@ -44,6 +56,21 @@ test('raise for two pairs if we have only half of it', () => {
       { rank:"Q" },
       { rank:"2" },
       { rank:"K" }
+    ]
+    ),
+    value => {
+      expect(value).toBe(9);
+    });
+});
+
+test('raise for three of a kind', () => {
+  Player.betRequest(gameState([
+      { rank: "2" },
+      { rank: "K" }
+    ], [
+      { rank:"Q" },
+      { rank:"2" },
+      { rank:"2" }
     ]
     ),
     value => {
