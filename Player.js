@@ -8,7 +8,7 @@ class Player {
     const holeCards = currentPlayer.hole_cards;
     const isPair = holeCards[0].rank === holeCards[1].rank;
     const goodRanks = ["10", "J", "Q", "K", "A"];
-    if (goodRanks.indexOf(holeCards[0].rank) !== -1 && isPair) {
+    if (holeCards.length === 2 && goodRanks.indexOf(holeCards[0].rank) !== -1 && isPair) {
       bet(gameState.current_buy_in - currentPlayer.bet + gameState.minimum_raise);
     } else {
       bet(0);
