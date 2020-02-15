@@ -95,6 +95,11 @@ test('return 0 for other cases', () => {
 });
 
 function gameState(hole_cards) {
+  hole_cards.forEach(card => {
+    if (!card.suit) {
+      card.suit = "clubs";
+    }
+  });
   return {
     in_action: 0,
     current_buy_in: 10,
