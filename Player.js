@@ -32,23 +32,18 @@ class Player {
       return;
     }
 
-    if(allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10)
-    {
-      bet(callValue);
-      return;
-    }
-
     if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
     {
       bet(raiseValue);
       return;
     }
 
-     if (holeCards[0].rank >= 8 && isPair) {
+    if (holeCards[0].rank >= 13 || holeCards[1].rank >= 13) {
       bet(callValue);
-    } else if (callValue <= bigBlind) {
-      bet(callValue);
-    } else if (holeCards[0].rank >= 13 || holeCards[1].rank >= 13) {
+      return;
+    }
+
+    if (callValue <= bigBlind) {
       bet(callValue);
     } else {
       bet(0);
