@@ -8,7 +8,7 @@ class Player {
     const ThreeOfAKindScore = 300;
     const HighPairScore = 210;
     const OneHighCardScore = 113;
-    const SafeCallValue = 500;
+    const SafeCallValue = 200;
 
     const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
