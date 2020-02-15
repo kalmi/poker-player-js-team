@@ -18,6 +18,7 @@ class Player {
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
     const raiseValue = callValue + gameState.minimum_raise ;
+    const allInValue = 1000;
 
     if (holeCards[0].rank >= 12 && holeCards[1].rank >= 12)
     {
@@ -26,7 +27,7 @@ class Player {
     }
 
     if (holeCards[0].rank >= 10 && isPair) {
-      bet(raiseValue);
+      bet(allInValue);
     } else if (callValue <= bigBlind) {
       bet(callValue);
     } else if (holeCards[0].rank >= 13 || holeCards[1].rank >= 13) {
