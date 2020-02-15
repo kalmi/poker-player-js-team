@@ -40,7 +40,7 @@ test('call for random cards', () => {
       rank: "9"
     }
   ]), value => {
-    expect(value).toBe(0);
+    expect(value).toBe(8);
   });
 });
 
@@ -48,6 +48,7 @@ function gameState(hole_cards) {
   return {
     in_action: 0,
     current_buy_in: 10,
+    small_blind: 5,
     minimum_raise: 1,
     players: [
       {
