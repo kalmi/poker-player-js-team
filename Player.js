@@ -77,18 +77,44 @@ function stringCard2numberCard({rank, suit}) {
   }
 }
 
-function gameState2friendlyState(gameState) {
-  const currentPlayer = gameState.players[gameState.in_action];
-  const holeCards = currentPlayer.hole_cards;
-  const communityCards = gameState.community_cards || [];
-
-  const cards = {
-    holeCards: holeCards.map(stringCard2numberCard),
-    communityCards: communityCards.map(stringCard2numberCard),
-    allCards: [...holeCards, ...communityCards].map(stringCard2numberCard),
+function cards2stats(numberCards) {
+  const rankCount = new Map();
+  for (const {rank: cardRank} of numberCards) {
+    const count = rankCount.get(cardRank) || 0;
+    rankCount.set(cardRank, count + 1);
   }
 
-  return cards;
+  const [rank, count] = new Array(rankCount.entries()).sort((a,b) => b[1] - a[1])[0];
+
+  return {
+    type: "nOfAKind",
+    rank,
+    count,
+  }
+}
+
+function gameState2friendlyState(gameState) {
+  const currentPlayer = gameState.players[gameState.in_action];
+  const rawHoleCards = currentPlayer.hole_cards;
+  const rawCommunityCards = gameState.community_cards || [];
+
+  const holeCards = rawHoleCards.map(stringCard2numberCard);
+  const communityCards = rawCommunityCards.map(stringCard2numberCard);
+  const allCards = [...holeCards, ...communityCards];
+
+  const holeStat = cards2stats(holeCards);
+  const communityStat = cards2stats(communityCards);
+  const allCardsStat = cards2stats(allCards);
+
+  return {
+    holeCards,
+    communityCards,
+    allCards,
+
+    holeStat,
+    communityStat,
+    allCardsStat
+  };
 }
 
 module.exports = Player;
