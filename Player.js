@@ -105,6 +105,7 @@ function cards2stats(numberCards) {
     }
   }
 
+  // Count ranks
   const rankCountMap = new Map();
   for (const {rank: cardRank} of numberCards) {
     const count = rankCountMap.get(cardRank) || 0;
@@ -119,6 +120,48 @@ function cards2stats(numberCards) {
     return result;
   });
   const [rank, rankCount] = rankEntries[0];
+
+  // Count suits
+  const suitCountMap = new Map();
+  for (const {suit: cardSuit} of numberCards) {
+    const count = suitCountMap.get(cardSuit) || 0;
+    suitCountMap.set(cardSuit, count + 1);
+  }
+  const suitEntries = Array.from(suitCountMap.entries());
+  suitEntries.sort((a,b) => b[1] - a[1]);
+  const [_, suitCount] = suitEntries[0];
+
+  let secondRankCount = undefined;
+  let secondRank = undefined;
+  if (suitEntries.length > 1) {
+    const secondEntry = suitEntries[1];
+    [secondRank, secondRankCount] = secondEntry;
+  }
+
+  const FourOfAKind = 800;
+  const FullHouse = 700;
+  const Flush = 600;
+
+  if (rankCount === 4) {
+    return {
+      type: 'Four of a kind',
+      score: FourOfAKind + rank,
+    }
+  }
+
+  if (rankCount >= 3 && secondRankCount >= 2) {
+    return {
+      type: 'Full house',
+      score: FullHouse + rank + secondRank / 100,
+    }
+  }
+
+  if (suitCount >= 5) {
+    return {
+      type: "Flush",
+      score: Flush,
+    }
+  }
 
   return {
     type: "n", // n of a kind

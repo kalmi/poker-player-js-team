@@ -184,18 +184,18 @@ test('return 0 for other cases', () => {
   });
 });
 
-function gameState(hole_cards, communityCards) {
+function gameState(holeCards, communityCards) {
+  const Suits = ["clubs", "diamonds", "hearts", "spades"];
+  let suitRoundRobinCounter = 0;  
+  const fixUpCard = (card) => ({
+    suit: Suits[suitRoundRobinCounter++ % Suits.length],
+    ...card,
+  });
+
   communityCards = communityCards || [];
-  hole_cards.forEach(card => {
-    if (!card.suit) {
-      card.suit = "clubs";
-    }
-  });
-  communityCards.forEach(card => {
-    if (!card.suit) {
-      card.suit = "clubs";
-    }
-  });
+  holeCards = holeCards.map(fixUpCard);
+  communityCards = communityCards.map(fixUpCard);
+
   return {
     in_action: 0,
     current_buy_in: 10,
@@ -204,7 +204,7 @@ function gameState(hole_cards, communityCards) {
     players: [
       {
         bet: 2,
-        hole_cards: hole_cards
+        hole_cards: holeCards
       }
     ],
     community_cards: communityCards
