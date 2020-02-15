@@ -26,6 +26,34 @@ test('call for random cards', () => {
   });
 });
 
+test('call for 8 pair', () => {
+  Player.betRequest(gameState([
+    {
+      rank: "8"
+    },
+    {
+      rank: "8"
+    }
+  ]), value => {
+    expect(value).toBe(8);
+  });
+});
+
+test('call for high value', () => {
+  const game = gameState([
+    {
+      rank: "K"
+    },
+    {
+      rank: "2"
+    }
+  ]);
+  game.small_blind = 1;
+  Player.betRequest(game, value => {
+    expect(value).toBe(8);
+  });
+});
+
 test('raise for A K hand', () => {
   Player.betRequest(gameState([
     {
@@ -60,6 +88,19 @@ test('raise for Q A hand', () => {
     {
       rank: "A"
     }
+  ]), value => {
+    expect(value).toBe(9);
+  });
+});
+
+test('raise for all cards pair', () => {
+  Player.betRequest(gameState([
+    { rank: "10" },
+    { rank: "2" }
+  ], [
+    { rank: "10" },
+    { rank: "K" },
+    { rank: "J" }
   ]), value => {
     expect(value).toBe(9);
   });
