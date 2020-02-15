@@ -74,6 +74,21 @@ test('call for high value', () => {
   });
 });
 
+test('fold for high cards over 500 callvalue', () => {
+  const game = gameState([
+    {
+      rank: "K"
+    },
+    {
+      rank: "2"
+    }
+  ]);
+  game.small_blind = 501;
+  Player.betRequest(game, value => {
+    expect(value).toBe(8);
+  });
+});
+
 test('raise for A K hand', () => {
   Player.betRequest(gameState([
     {
