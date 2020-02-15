@@ -40,10 +40,6 @@ test('call for random cards', () => {
   });
 });
 
-
-
-
-
 test('raise for A K hand', () => {
   Player.betRequest(gameState([
     {
@@ -80,6 +76,21 @@ test('raise for Q A hand', () => {
     }
   ]), value => {
     expect(value).toBe(9);
+  });
+});
+
+test('return 0 for other cases', () => {
+  const game = gameState([
+    {
+      rank: "2"
+    },
+    {
+      rank: "5"
+    }
+  ]);
+  game.current_buy_in = 100;
+  Player.betRequest(game, value => {
+    expect(value).toBe(0);
   });
 });
 
