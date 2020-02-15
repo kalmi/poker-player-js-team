@@ -5,7 +5,7 @@ class Player {
 
   static betRequest(gameState, bet) {
 
-    const {holeCards, allCardsStat} = gameState2friendlyState(gameState);
+    const {holeCards, allCardsStat, holeStat} = gameState2friendlyState(gameState);
 
     console.log(allCardsStat);
 
@@ -22,14 +22,19 @@ class Player {
     const raiseValue = callValue + gameState.minimum_raise ;
     const allInValue = 1000;
 
-    if (allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10) {
+    if (holeStat.count >= 2 && holeStat.rank >= 10 && holeStat.type === "n") {
       bet(allInValue);
       return;
     }
 
-    if(allCardsStat.count >= 2 && allCardsStat.type === "n")
-    {
+    if (allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10) {
       bet(raiseValue);
+      return;
+    }
+
+    if(allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10)
+    {
+      bet(callValue);
       return;
     }
 
@@ -39,9 +44,7 @@ class Player {
       return;
     }
 
-    if (holeCards[0].rank >= 10 && isPair) {
-      bet(allInValue);
-    } else if (holeCards[0].rank >= 8 && isPair) {
+     if (holeCards[0].rank >= 8 && isPair) {
       bet(callValue);
     } else if (callValue <= bigBlind) {
       bet(callValue);

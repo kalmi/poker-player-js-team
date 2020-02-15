@@ -65,7 +65,7 @@ test('raise for Q A hand', () => {
   });
 });
 
-test('have any pair raise', () => {
+test('have any pair call', () => {
   Player.betRequest(gameState([
     {
       rank: "2"
@@ -86,7 +86,7 @@ test('have any pair raise', () => {
       ]
   ),
     value => {
-    expect(value).toBe(9);
+    expect(value).toBe(8);
   });
 });
 
