@@ -9,7 +9,7 @@ class Player {
 
     const currentPlayer = gameState.players[gameState.in_action];
 
-    if (holeCards.length !== 2){
+    if (holeCards.length !== 2) {
       bet(0);
       return;
     }
