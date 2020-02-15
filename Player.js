@@ -78,18 +78,26 @@ function stringCard2numberCard({rank, suit}) {
 }
 
 function cards2stats(numberCards) {
+
+  if (numberCards.length === 0) {
+    return {type: "none"}
+  }
+
   const rankCount = new Map();
   for (const {rank: cardRank} of numberCards) {
     const count = rankCount.get(cardRank) || 0;
     rankCount.set(cardRank, count + 1);
   }
 
-  const [rank, count] = new Array(rankCount.entries()).sort((a,b) => b[1] - a[1])[0];
+  const entries = Array.from(rankCount.entries());
+  entries.sort((a,b) => b[1] - a[1]);
+  const [rank, count] = entries[0];
 
   return {
     type: "nOfAKind",
     rank,
     count,
+    score: count * 100 + rank
   }
 }
 
