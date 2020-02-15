@@ -22,17 +22,17 @@ class Player {
     const raiseValue = callValue + gameState.minimum_raise ;
     const allInValue = 1000;
 
-    if (holeStat.count >= 2 && holeStat.rank >= 10 && holeStat.type === "n") {
+    if (holeStat.type === "n" && holeStat.count >= 2 && holeStat.rank >= 10) {
       bet(allInValue);
       return;
     }
 
-    if (allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10) {
+    if (allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10) {
       bet(raiseValue);
       return;
     }
 
-    if(allCardsStat.count >= 2 && allCardsStat.type === "n" && allCardsStat.rank >= 10)
+    if(allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10)
     {
       bet(callValue);
       return;
