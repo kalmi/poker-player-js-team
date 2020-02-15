@@ -5,7 +5,7 @@ test('all in for 10 pairs', () => {
     { rank: "10" },
     { rank: "10" },
   ]), value => {
-    expect(value).toBe(700);
+    expect(value).toBe(900);
   });
 });
 
