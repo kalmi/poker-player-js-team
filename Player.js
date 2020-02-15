@@ -105,27 +105,27 @@ function cards2stats(numberCards) {
     }
   }
 
-  const rankCount = new Map();
+  const rankCountMap = new Map();
   for (const {rank: cardRank} of numberCards) {
-    const count = rankCount.get(cardRank) || 0;
-    rankCount.set(cardRank, count + 1);
+    const count = rankCountMap.get(cardRank) || 0;
+    rankCountMap.set(cardRank, count + 1);
   }
 
-  const entries = Array.from(rankCount.entries());
-  entries.sort((a,b) => {
+  const rankEntries = Array.from(rankCountMap.entries());
+  rankEntries.sort((a,b) => {
     let result = b[1] - a[1];
     if (result === 0) {
       result = b[0] - a[0];
     }
     return result;
   });
-  const [rank, count] = entries[0];
+  const [rank, rankCount] = rankEntries[0];
 
   return {
     type: "n", // n of a kind
     rank,
-    count,
-    score: count * 100 + rank
+    count: rankCount,
+    score: rankCount * 100 + rank
   }
 }
 
