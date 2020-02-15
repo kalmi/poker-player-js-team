@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.1';
+    return '10000';
   }
 
   static betRequest(gameState, bet) {
@@ -8,7 +8,7 @@ class Player {
     const ThreeOfAKindScore = 300;
     const HighPairScore = 210;
     const OneHighCardScore = 113;
-    const SafeCallValue = 1000;
+    const SafeCallValue = 10000;
 
     const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
