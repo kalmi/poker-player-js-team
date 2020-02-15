@@ -63,7 +63,7 @@ test('raise for two pairs if we have only half of it', () => {
     });
 });
 
-test('raise for three of a kind', () => {
+test('all in for three of a kind', () => {
   Player.betRequest(gameState([
       { rank: "2" },
       { rank: "K" }
@@ -74,7 +74,7 @@ test('raise for three of a kind', () => {
     ]
     ),
     value => {
-      expect(value).toBe(9);
+      expect(value).toBe(800);
     });
 });
 

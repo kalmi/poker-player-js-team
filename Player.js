@@ -5,6 +5,7 @@ class Player {
 
   static betRequest(gameState, bet) {
     const AllInValue = 800;
+    const ThreeOfAKindScore = 300;
     const HighPairScore = 210;
     const OneHighCardScore = 113;
     const SafeCallValue = 500;
@@ -26,6 +27,11 @@ class Player {
     const ownBetter = communityStat.score < allCardsStat.score;
 
     if (holeStat.score >= HighPairScore) {
+      bet(AllInValue);
+      return;
+    }
+
+    if (allCardsStat.score >= ThreeOfAKindScore  && ownBetter) {
       bet(AllInValue);
       return;
     }
