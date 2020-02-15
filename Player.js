@@ -20,12 +20,15 @@ class Player {
     const allInValue = 1000;
     const ownBetter = communityStat.score < allCardsStat.score;
 
-    if (holeStat.type === "n" && holeStat.count >= 2 && holeStat.rank >= 10) {
+    const HighPairScore = 210;
+    const OneHighCardScore = 113;
+
+    if (holeStat.score >= HighPairScore) {
       bet(allInValue);
       return;
     }
 
-    if (allCardsStat.type === "n" && allCardsStat.count >= 2 && allCardsStat.rank >= 10  && ownBetter) {
+    if (allCardsStat.score >= HighPairScore  && ownBetter) {
       bet(raiseValue);
       return;
     }
@@ -35,7 +38,7 @@ class Player {
       return;
     }
 
-    if (holeCards[0].rank >= 13 || holeCards[1].rank >= 13) {
+    if (holeStat.score >= OneHighCardScore) {
       if(callValue <= 500)
       {
         bet(callValue);
