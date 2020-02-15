@@ -4,7 +4,7 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    const AllInValue = 800;
+    const AllInValue = 1000;
     const HighPairScore = 210;
     const OneHighCardScore = 113;
 
