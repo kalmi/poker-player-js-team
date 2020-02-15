@@ -2,12 +2,8 @@ const Player = require('./Player');
 
 test('all in for 10 pairs', () => {
   Player.betRequest(gameState([
-    {
-      rank: "10"
-    },
-    {
-      rank: "10"
-    }
+    { rank: "10" },
+    { rank: "10" },
   ]), value => {
     expect(value).toBe(1000);
   });
@@ -15,19 +11,11 @@ test('all in for 10 pairs', () => {
 
 test('call for 10 pair in community', () => {
   Player.betRequest(gameState([
-    {
-      rank: "7"
-    },
-    {
-      rank: "4"
-    }
+    { rank: "7" },
+    { rank: "4" }
   ], [
-    {
-      rank: "10"
-    },
-    {
-      rank: "10"
-    }
+    { rank: "10" },
+    { rank: "10" },
   ]), value => {
     expect(value).toBe(8);
   });
@@ -35,12 +23,8 @@ test('call for 10 pair in community', () => {
 
 test('call for random cards', () => {
   Player.betRequest(gameState([
-    {
-      rank: "A"
-    },
-    {
-      rank: "9"
-    }
+    { rank: "A" },
+    { rank: "9" },
   ]), value => {
     expect(value).toBe(8);
   });
@@ -48,12 +32,8 @@ test('call for random cards', () => {
 
 test('call for 8 pair', () => {
   Player.betRequest(gameState([
-    {
-      rank: "8"
-    },
-    {
-      rank: "8"
-    }
+    { rank: "8" },
+    { rank: "8" },
   ]), value => {
     expect(value).toBe(8);
   });
@@ -61,12 +41,8 @@ test('call for 8 pair', () => {
 
 test('call for high value', () => {
   const game = gameState([
-    {
-      rank: "K"
-    },
-    {
-      rank: "2"
-    }
+    { rank: "K" },
+    { rank: "2" },
   ]);
   game.small_blind = 1;
   Player.betRequest(game, value => {
@@ -76,12 +52,8 @@ test('call for high value', () => {
 
 test('fold for high cards over 500 callvalue', () => {
   const game = gameState([
-    {
-      rank: "K"
-    },
-    {
-      rank: "2"
-    }
+    { rank: "K" },
+    { rank: "2" },
   ]);
   game.small_blind = 501;
   Player.betRequest(game, value => {
@@ -91,12 +63,8 @@ test('fold for high cards over 500 callvalue', () => {
 
 test('raise for A K hand', () => {
   Player.betRequest(gameState([
-    {
-      rank: "A"
-    },
-    {
-      rank: "K"
-    }
+    { rank: "A" },
+    { rank: "K" },
   ]), value => {
     expect(value).toBe(9);
   });
@@ -104,12 +72,8 @@ test('raise for A K hand', () => {
 
 test('raise for Q K hand', () => {
   Player.betRequest(gameState([
-    {
-      rank: "Q"
-    },
-    {
-      rank: "K"
-    }
+    { rank: "Q" },
+    { rank: "K" },
   ]), value => {
     expect(value).toBe(9);
   });
@@ -117,12 +81,8 @@ test('raise for Q K hand', () => {
 
 test('raise for Q A hand', () => {
   Player.betRequest(gameState([
-    {
-      rank: "Q"
-    },
-    {
-      rank: "A"
-    }
+    { rank: "Q" },
+    { rank: "A" },
   ]), value => {
     expect(value).toBe(9);
   });
@@ -135,7 +95,7 @@ test('raise for all cards pair', () => {
   ], [
     { rank: "10" },
     { rank: "K" },
-    { rank: "J" }
+    { rank: "J" },
   ]), value => {
     expect(value).toBe(9);
   });
@@ -143,22 +103,12 @@ test('raise for all cards pair', () => {
 
 test('have any pair call', () => {
   Player.betRequest(gameState([
-    {
-      rank: "2"
-    },
-    {
-      rank: "A"
-    }
+    { rank: "2" },
+    { rank: "A" }
   ], [
-    {
-      rank:"Q"
-    },
-    {
-      rank:"2"
-    },
-    {
-      rank:"3"
-    }
+    { rank:"Q" },
+    { rank:"2" },
+    { rank:"3" }
       ]
   ),
     value => {
@@ -168,12 +118,8 @@ test('have any pair call', () => {
 
 test('return 0 for other cases', () => {
   const game = gameState([
-    {
-      rank: "2"
-    },
-    {
-      rank: "5"
-    }
+    { rank: "2" },
+    { rank: "5" },
   ]);
   game.current_buy_in = 100;
   Player.betRequest(game, value => {
