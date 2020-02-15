@@ -4,6 +4,9 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
+    const AllInValue = 1000;
+    const HighPairScore = 210;
+    const OneHighCardScore = 113;
 
     const {holeCards, allCardsStat, holeStat, communityStat} = gameState2friendlyState(gameState);
 
@@ -19,14 +22,10 @@ class Player {
     const bigBlind = gameState.small_blind * 2;
     const callValue = gameState.current_buy_in - currentPlayer.bet;
     const raiseValue = callValue + gameState.minimum_raise ;
-    const allInValue = 1000;
     const ownBetter = communityStat.score < allCardsStat.score;
 
-    const HighPairScore = 210;
-    const OneHighCardScore = 113;
-
     if (holeStat.score >= HighPairScore) {
-      bet(allInValue);
+      bet(AllInValue);
       return;
     }
 
