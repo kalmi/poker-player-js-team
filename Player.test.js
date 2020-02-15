@@ -1,6 +1,6 @@
 const Player = require('./Player');
 
-test('raise for 10 pairs', (done) => {
+test('all in for 10 pairs', () => {
   Player.betRequest(gameState([
     {
       rank: "10"
@@ -9,21 +9,7 @@ test('raise for 10 pairs', (done) => {
       rank: "10"
     }
   ]), value => {
-    expect(value).toBe(9);
-    done();
-  });
-});
-
-test('raise for 10 pairs', () => {
-  Player.betRequest(gameState([
-    {
-      rank: "10"
-    },
-    {
-      rank: "10"
-    }
-  ]), value => {
-    expect(value).toBe(9);
+    expect(value).toBe(1000);
   });
 });
 
